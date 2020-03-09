@@ -1,5 +1,13 @@
-<h1>HELLO</h1>
 <app-player></app-player>
 <app-producer-controls></app-producer-controls>
 <app-sample-points></app-sample-points>
 <app-sample-item></app-sample-item>
+<p>
+    <input type="text" #urlSource placeholder="Enter URL source"/>
+</p>
+<p>
+    <input type="file" #fileSource/>
+</p>
+<p>
+    <button (click)="loadSource()">Load Source</button>
+</p>
