@@ -1,1 +1,9 @@
-<p>Sample points</p>
+<div>
+    <app-sample-item 
+        *ngFor="let sample of samples; let i = index" 
+        [startPoint] ="sample"
+        [endPoint]   = "samples[i+1]"
+        [count] = "i+1"
+    >
+    </app-sample-item>
+</div>

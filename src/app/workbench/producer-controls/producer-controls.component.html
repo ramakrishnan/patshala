@@ -1,6 +1,6 @@
 <div class="button-controls">
-    <button>Play</button>
-    <button>Sample</button>
-    <button>Reset</button>
-    <button>Preview</button>
+    <button [disabled]="!showControls" class="btn btn-primary" (click) = "this.onPlayPause($event)">Play</button>
+    <button [disabled]="!showControls" class="btn btn-danger" (click) = "this.onResetSample()">Reset</button>
+    <button [disabled]="!showControls" class="btn btn-primary" (click) = "this.onSample()">Sample</button>
+    <!-- <button (click) = "this.onReview()">Preview</button> -->
 </div>

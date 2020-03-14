@@ -73,4 +73,21 @@ export class PlayerService {
             reader.readAsDataURL(file);
         }
     }
+
+    async play() {
+        this.player.play();
+    }
+
+    pause() {
+        this.player.pause();
+    }
+
+    stop() {
+        this.pause();
+        this.player.currentTime = 0;
+    }
+
+    getStatus() {
+        return this.playerState;
+    }
 }
