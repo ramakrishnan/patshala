@@ -1,4 +1,8 @@
-.sampleSection {
-    padding-bottom: 10px;
-    border-bottom: 2px solid gray;
+.col-2 {
+    margin: 2px;
+}
+.scroll-v {
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

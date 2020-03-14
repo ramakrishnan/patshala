@@ -1,20 +1,18 @@
-<ul class="list-group">
+<ul class="list-group scroll-v">
     <li class="list-group-item">
         <div class="row">
-            <div class="col-2">
-                <button class="btn btn-primary">+</button>
+            <div class="col-1">
+                <button (click) = "decreaseTime()" class="btn-sm btn btn-primary">-</button>
             </div>
-            <div class="col-2">
-                <button class="btn btn-primary">-</button>
+            <div class="col">
+                <span> Start {{ startPoint }}</span>
+                <span> End {{ endPoint }}</span>
             </div>
-            <div class="col-4">
-                <p> Sample {{ count }}</p>
+            <div class="col-1">
+                <button (click) = "increaseTime()" class="btn-sm btn btn-primary">+</button>
             </div>
-            <div class="col-2">
-                <button class="btn btn-primary">+</button>
-            </div>
-            <div class="col-2">
-                <button class="btn btn-primary">-</button>
+            <div class="col-1">
+                <button class="btn-sm btn btn-light">P</button>
             </div>
         </div>
     </li>

@@ -8,7 +8,7 @@ import { PlayerService, IPlayerState } from '@app/service/player.service';
 export class WorkbenchComponent {
     @ViewChild('fileSource') fileSource: ElementRef;
     public showControls = false;
-    public samples = [];
+    public samples = [0];
     constructor(public player: PlayerService) {
         this.player.onStateChange.subscribe((state: IPlayerState) => {
             if (state.ready) {

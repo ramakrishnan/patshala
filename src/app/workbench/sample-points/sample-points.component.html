@@ -3,7 +3,9 @@
         *ngFor="let sample of samples; let i = index" 
         [startPoint] ="sample"
         [endPoint]   = "samples[i+1]"
-        [count] = "i+1"
+        [index] = "i+1"
+        (decrease) = "onDecrease($event)"
+        (increase) = "onIncrease($event)"
     >
     </app-sample-item>
 </div>

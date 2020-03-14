@@ -6,4 +6,12 @@ import { Component, Input } from '@angular/core';
 })
 export class SamplePointsComponent {
     @Input() samples: number[] = [0];
+
+    onIncrease(event: { index: number }) {
+        this.samples[event.index] = this.samples[event.index] + 0.100;
+    }
+
+    onDecrease(event: { index: number }) {
+        this.samples[event.index] = this.samples[event.index] - 0.100;
+    }
 }

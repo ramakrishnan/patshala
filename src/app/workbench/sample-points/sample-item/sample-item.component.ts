@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-sample-item',
@@ -8,5 +8,15 @@ import { Component, Input } from '@angular/core';
 export class SampleItemComponent {
     @Input() startPoint: number;
     @Input() endPoint: number | undefined;
-    @Input() count: number;
+    @Input() index: number;
+    @Output() decrease: EventEmitter<{ index: number }> = new EventEmitter<{ index: number }>();
+    @Output() increase: EventEmitter<{ index: number }> = new EventEmitter<{ index: number }>();
+
+    decreaseTime() {
+        this.decrease.emit({ index: this.index - 1 });
+    }
+
+    increaseTime() {
+        this.increase.emit({ index: this.index });
+    }
 }
