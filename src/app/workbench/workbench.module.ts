@@ -7,7 +7,7 @@ import { WorkbenchComponent } from '@app/workbench/workbench.component';
 import { ProducerControlsComponent } from '@app/workbench/producer-controls/producer-controls.component';
 import { SamplePointsComponent } from '@app/workbench/sample-points/sample-points.component';
 import { SampleItemComponent } from '@app/workbench/sample-points/sample-item/sample-item.component';
-// import { NavigationComponent } from '@app/shared/navigation/navigation.component';
+import { RecorderComponent } from '@app/workbench/recorder/recorder.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { SampleItemComponent } from '@app/workbench/sample-points/sample-item/sa
     ProducerControlsComponent,
     SamplePointsComponent,
     SampleItemComponent,
-    // NavigationComponent
+    RecorderComponent
   ],
   imports: [
     BrowserModule,

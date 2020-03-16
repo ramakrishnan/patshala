@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="cols">
+        <div class="button-controls">
+            <!-- <pre> {{ recorderState.ready }} </pre> -->
+            <pre> {{ recorderState.ready && !recorderState.recording }} </pre>
+            <!-- <pre> {{ !(recorderState.ready && !recorderState.recording) }} </pre> -->
+            <button [disabled]="!(recorderState.ready && !recorderState.recording)" 
+                class="btn btn-primary" (click)="this.record()">Record</button>
+            <button [disabled]="!(recorderState.ready && recorderState.recording)"
+                class="btn btn-danger" (click)="this.pause()">Pause</button>
+            <button [disabled]="(recorderState.ready && !recorderState.recording)" 
+                class="btn btn-primary" (click)="this.stop()">Stop</button>
+            <a href="#" ng-disabled="!(recorderState.ready && recorderState.stopped)"
+                class="list-group-item list-group-item-action active"
+                (click)="this.download($event)">
+                Download
+            </a>
+            <button [disabled]="!(recorderState.ready && recorderState.recording)"
+                class="btn btn-primary" (click)="this.sample()">Sample</button>
+        </div>
+    </div>
+</div>
