@@ -9,6 +9,7 @@ import { IRecorderState, RecorderService } from '@app/service/recorder.service';
 })
 export class RecorderComponent implements OnInit {
     @Output() newSample: EventEmitter<number> = new EventEmitter<number>();
+    @Output() recordStop = new EventEmitter();
     public recorderState: IRecorderState = {
         ready: false,
         recording: false,
@@ -34,8 +35,9 @@ export class RecorderComponent implements OnInit {
         this.recorder.pause();
     }
 
-    stop() {
-        this.recorder.stop();
+    async stop() {
+        await this.recorder.stop();
+        this.recordStop.emit();
     }
 
     download(event) {

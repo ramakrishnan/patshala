@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { PlayerService, IPlayerState } from '@app/service/player.service';
+import { RecorderService } from '@app/service/recorder.service';
 @Component({
     selector: 'app-workbench',
     styleUrls: ['./workbench.scss'],
@@ -9,7 +10,7 @@ export class WorkbenchComponent {
     @ViewChild('fileSource') fileSource: ElementRef;
     public showControls = false;
     public samples = [0];
-    constructor(public player: PlayerService) {
+    constructor(public player: PlayerService, public recorder: RecorderService) {
         this.player.onStateChange.subscribe((state: IPlayerState) => {
             if (state.ready) {
                 this.showControls = true;
@@ -21,11 +22,14 @@ export class WorkbenchComponent {
         event.play ? this.player.play() : this.player.pause();
     }
 
-    onNewSamplePoint() {
-        this.player.pause();
-        const { currentTime } = this.player.getStatus();
-        this.samples.push(currentTime);
+    onNewSamplePoint(time) {
+        this.samples.push(time);
         this.player.play();
+    }
+
+    onRecordStop() {
+        const audioBlob = this.recorder.downloadUrl();
+        this.player.loadBlob(audioBlob);
     }
 
     onResetSamples() {

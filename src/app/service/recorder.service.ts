@@ -11,6 +11,7 @@ export interface IRecorderState {
     providedIn: 'root'
 })
 export class RecorderService {
+    public recordTimeSlot = 1000;
     public recorder: any;
     public recorderState: IRecorderState = {
         ready: false,
@@ -19,7 +20,7 @@ export class RecorderService {
     };
     public recordStream = [];
     public onStateChange = new Subject();
-
+    public blobCaptureInterval;
     async create() {
         if (navigator.mediaDevices) {
             console.log('getUserMedia supported.');
@@ -43,7 +44,7 @@ export class RecorderService {
         this.recordStream = [];
         this.recorderState.recording = true;
         this.onStateChange.next(this.recorderState);
-        this.recorder.start(3000);
+        this.recorder.start(this.recordTimeSlot);
     }
 
     pause() {
@@ -51,10 +52,14 @@ export class RecorderService {
         this.recorder.pause();
     }
 
-    stop() {
-        this.recorderState.recording = false;
-        this.recorderState.stopped = true;
-        this.recorder.stop();
+    async stop() {
+        return new Promise((resolve) => {
+            this.recorder.requestData();
+            this.recorder.stop();
+            this.recorderState.recording = false;
+            this.recorderState.stopped = true;
+            resolve(true);
+        });
     }
 
     downloadUrl() {

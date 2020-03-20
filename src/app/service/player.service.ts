@@ -74,6 +74,11 @@ export class PlayerService {
         }
     }
 
+    loadBlob(blobStr) {
+        this.player.src = blobStr;
+        this.player.playbackRate = 1;
+    }
+
     async play() {
         this.player.play();
     }
