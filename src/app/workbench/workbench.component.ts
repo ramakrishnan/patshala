@@ -22,9 +22,8 @@ export class WorkbenchComponent {
         event.play ? this.player.play() : this.player.pause();
     }
 
-    onNewSamplePoint(time) {
-        this.samples.push(time);
-        this.player.play();
+    onNewSamplePoint() {
+        this.samples.push(this.player.getStatus().currentTime);
     }
 
     onRecordStop() {
@@ -36,7 +35,12 @@ export class WorkbenchComponent {
         this.player.stop();
         this.samples = [0];
     }
+
     loadSource() {
         this.player.loadFile(this.fileSource.nativeElement.files[0]);
+    }
+
+    onPlayBackChange(speed) {
+        this.player.setPlayBackRate(speed);
     }
 }

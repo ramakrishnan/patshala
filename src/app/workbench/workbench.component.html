@@ -5,6 +5,8 @@
             <app-producer-controls 
                 [showControls]="showControls"
                 (pausePlay)="this.onPausePlayer($event)"
+                (newSample)="this.onNewSamplePoint()"
+                (playBackChange)="this.onPlayBackChange($event)"
                 (resetSample)="this.onResetSamples()">
             </app-producer-controls>
             <div class="file-controls">
@@ -15,7 +17,6 @@
                 <button class="btn btn-primary" (click)="loadSource()">Load Source</button>
             </div>
             <app-recorder
-                (newSample)="this.onNewSamplePoint($event)"
                 (recordStop)="this.onRecordStop()"
             >
             </app-recorder>

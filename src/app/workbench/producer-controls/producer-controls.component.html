@@ -3,4 +3,10 @@
     <button [disabled]="!showControls" class="btn btn-danger" (click) = "this.onResetSample()">Reset</button>
     <button [disabled]="!showControls" class="btn btn-primary" (click) = "this.onSample()">Sample</button>
     <!-- <button (click) = "this.onReview()">Preview</button> -->
+    <select id="playbackSpeed" (change)="changePlayBackSpeed($event)">
+        <option value="1" selected>1</option>
+        <option value="0.95">0.95</option>
+        <option value="0.85">0.85</option>
+        <option value="0.75">0.74</option>
+    </select>
 </div>

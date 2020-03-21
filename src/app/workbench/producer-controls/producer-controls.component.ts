@@ -10,6 +10,7 @@ export class ProducerControlsComponent {
     @Output() pausePlay: EventEmitter<{ play: boolean}> = new EventEmitter<{ play: boolean}>();
     @Output() newSample: EventEmitter<null> = new EventEmitter<null>();
     @Output() resetSample: EventEmitter<null> = new EventEmitter<null>();
+    @Output() playBackChange: EventEmitter<number> = new EventEmitter<number>();
     playing = false;
 
     onPlayPause(event: InputEvent) {
@@ -26,5 +27,9 @@ export class ProducerControlsComponent {
 
     onResetSample() {
         this.resetSample.emit(null);
+    }
+
+    changePlayBackSpeed(event) {
+        this.playBackChange.emit(+event.target.value);
     }
 }

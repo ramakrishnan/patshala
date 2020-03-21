@@ -4,15 +4,15 @@
             <div class="col-1">
                 <button (click) = "decreaseTime()" class="btn-sm btn btn-primary">-</button>
             </div>
-            <div class="col">
-                <span> Start {{ startPoint }}</span>
-                <span> End {{ endPoint }}</span>
+            <div class="col-4">
+                <span> Point {{ index }}</span>
             </div>
             <div class="col-1">
                 <button (click) = "increaseTime()" class="btn-sm btn btn-primary">+</button>
             </div>
-            <div class="col-1">
-                <button class="btn-sm btn btn-light">P</button>
+            <div class="col-2">
+                <button class="btn-sm btn btn-light" (click)="playSection()">Play</button>
+                <button class="btn-sm btn btn-danger" (click)="deleteSection()">D</button>
             </div>
         </div>
     </li>

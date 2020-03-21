@@ -74,6 +74,10 @@ export class PlayerService {
         }
     }
 
+    setPlayBackRate(speed) {
+        this.player.playbackRate = speed;
+    }
+
     loadBlob(blobStr) {
         this.player.src = blobStr;
         this.player.playbackRate = 1;
@@ -94,5 +98,14 @@ export class PlayerService {
 
     getStatus() {
         return this.playerState;
+    }
+
+    async playBetween(start: number, end: number) {
+        this.player.currentTime = start;
+        const timeGap = Number((end - start).toFixed(4)) * 1000;
+        await this.play();
+        setTimeout(() => {
+            this.pause();
+        }, timeGap * this.player.playbackRate);
     }
 }

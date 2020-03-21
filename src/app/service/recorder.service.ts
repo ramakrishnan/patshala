@@ -55,10 +55,12 @@ export class RecorderService {
     async stop() {
         return new Promise((resolve) => {
             this.recorder.requestData();
-            this.recorder.stop();
-            this.recorderState.recording = false;
-            this.recorderState.stopped = true;
-            resolve(true);
+            setTimeout(() => {
+                this.recorder.stop();
+                this.recorderState.recording = false;
+                this.recorderState.stopped = true;
+                resolve(true);
+            }, 0);
         });
     }
 
