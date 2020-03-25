@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <app-player></app-player>
             <app-producer-controls 
                 [showControls]="showControls"
@@ -21,9 +21,11 @@
             >
             </app-recorder>
         </div>
-        <div class="col">
+        <div class="col-6">
             <app-sample-points 
                 *ngIf="samples.length > 1"
+                (addNewStep)="this.onAddNewStep()"
+                (loadState)="this.onLoadState($event)"
                 [samples]="samples">
             </app-sample-points>
         </div>

@@ -1,4 +1,16 @@
 <div>
+    <ul class="nav nav-tabs">
+        <li *ngFor="let nav of navList; let i = index"
+          class="nav-item">
+          <a [ngClass]="{ 'active': currentStep }"
+          (click)="switchStep($event)"
+          class="nav-link">{{ nav }}</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="newStep()"
+          class="nav-link">New Step</a>
+        </li>
+    </ul>
     <app-sample-item 
         *ngFor="let sample of samples; let i = index" 
         [startPoint] ="sample"
@@ -8,6 +20,7 @@
         (increase) = "onIncrease($event)"
         (playPortion) = "onPlayPortion($event)"
         (deletePortion) = "onDeletePortion($event)"
+        (mutePortion) = "onMutePortion($event)"
     >
     </app-sample-item>
 </div>

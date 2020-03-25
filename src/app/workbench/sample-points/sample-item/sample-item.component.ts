@@ -13,6 +13,7 @@ export class SampleItemComponent {
     @Output() increase: EventEmitter<{ index: number }> = new EventEmitter<{ index: number }>();
     @Output() playPortion: EventEmitter<number> = new EventEmitter<number>();
     @Output() deletePortion: EventEmitter<number> = new EventEmitter<number>();
+    @Output() mutePortion: EventEmitter<number> = new EventEmitter<number>();
 
     decreaseTime() {
         this.decrease.emit({ index: this.index - 1 });
@@ -25,5 +26,8 @@ export class SampleItemComponent {
     }
     deleteSection() {
         this.deletePortion.emit(this.index);
+    }
+    muteSection() {
+        this.mutePortion.emit(this.index);
     }
 }

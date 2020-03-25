@@ -102,10 +102,10 @@ export class PlayerService {
 
     async playBetween(start: number, end: number) {
         this.player.currentTime = start;
-        const timeGap = Number((end - start).toFixed(4)) * 1000;
+        const timeGap = (Number((end - start).toFixed(4)) / this.player.playbackRate ) * 1000;
         await this.play();
         setTimeout(() => {
             this.pause();
-        }, timeGap * this.player.playbackRate);
+        }, timeGap);
     }
 }

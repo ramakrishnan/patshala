@@ -1,27 +1,58 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from '@app/service/player.service';
+import { IStepInfo, ISteps } from '../workbench.component';
 
 @Component({
     selector: 'app-sample-points',
     templateUrl: './sample-points.component.html'
 })
 export class SamplePointsComponent {
-    constructor(public player: PlayerService) {}
-    @Input() samples: number[] = [0];
+    public currentStep = 0;
+    public navList = ['step-1'];
+    @Input() samples: IStepInfo[];
+    @Output() addNewStep: EventEmitter<null> = new EventEmitter<null>();
+    @Output() loadState: EventEmitter<number> = new EventEmitter<number>();
+    constructor(public player: PlayerService) {
+    }
 
     onIncrease(event: { index: number }) {
-        this.samples[event.index] = this.samples[event.index] + 0.100;
+        let { time } = this.samples[event.index];
+        time += 0.100;
+        this.samples[event.index].time = time;
     }
 
     onDecrease(event: { index: number }) {
-        this.samples[event.index] = this.samples[event.index] - 0.100;
+        let { time } = this.samples[event.index];
+        time -= 0.100;
+        this.samples[event.index].time = time;
     }
 
     onPlayPortion(index: number) {
-        this.player.playBetween( this.samples[index - 1],  this.samples[index]);
+        const startTime = this.samples[index - 1].time;
+        for (let i = index; i < this.samples.length; i++ ) {
+             if (!this.samples[i].silence) {
+                const stopTime = this.samples[i].time;
+                this.player.playBetween( startTime,  stopTime);
+                break;
+             }
+        }
     }
 
     onDeletePortion(index: number) {
         this.samples.splice((index - 1), 1);
+    }
+
+    onMutePortion(index: number) {
+        const { silence } = this.samples[index - 1];
+        this.samples[index - 1].silence = !silence;
+    }
+
+    newStep() {
+        this.navList.push('step-2');
+        this.addNewStep.emit();
+    }
+
+    switchStep(event) {
+        this.loadState.emit(this.currentStep);
     }
 }

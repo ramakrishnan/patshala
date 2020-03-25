@@ -1,6 +1,17 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { PlayerService, IPlayerState } from '@app/service/player.service';
 import { RecorderService } from '@app/service/recorder.service';
+
+export interface IStepInfo {
+    time: number;
+    silence: boolean;
+}
+export interface ISteps {
+    'step-1': IStepInfo[];
+    'step-2'?: IStepInfo[];
+    'step-3'?: IStepInfo[];
+}
+
 @Component({
     selector: 'app-workbench',
     styleUrls: ['./workbench.scss'],
@@ -9,7 +20,12 @@ import { RecorderService } from '@app/service/recorder.service';
 export class WorkbenchComponent {
     @ViewChild('fileSource') fileSource: ElementRef;
     public showControls = false;
-    public samples = [0];
+    public currentStep = 1;
+    public steps: ISteps = { 'step-1': []};
+    public samples: IStepInfo[] = [{
+        time: 0,
+        silence: false
+    }];
     constructor(public player: PlayerService, public recorder: RecorderService) {
         this.player.onStateChange.subscribe((state: IPlayerState) => {
             if (state.ready) {
@@ -23,7 +39,10 @@ export class WorkbenchComponent {
     }
 
     onNewSamplePoint() {
-        this.samples.push(this.player.getStatus().currentTime);
+        this.samples.push({
+            time: this.player.getStatus().currentTime,
+            silence: false
+        });
     }
 
     onRecordStop() {
@@ -33,7 +52,10 @@ export class WorkbenchComponent {
 
     onResetSamples() {
         this.player.stop();
-        this.samples = [0];
+        this.samples = [{
+            time: 0,
+            silence: false
+        }];
     }
 
     loadSource() {
@@ -42,5 +64,15 @@ export class WorkbenchComponent {
 
     onPlayBackChange(speed) {
         this.player.setPlayBackRate(speed);
+    }
+
+    onAddNewStep() {
+        this.steps[`step-${this.currentStep}`] = this.samples;
+        this.currentStep += 1;
+        this.steps[`step-${this.currentStep}`] = this.samples;
+    }
+
+    onLoadState(step) {
+        this.samples = this.steps[`step-${step}`];
     }
 }
